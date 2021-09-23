@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p = "http://www.springframework.org/schema/p"
+   xmlns:util = "http://www.springframework.org/schema/util"
+   xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	
+   <!-- through setters -->
+   <bean id = "s1" class = "com.atguigu.spring.di.Student">
+   		<property name="id">
+   			<value>10010</value>
+   		</property>
+   		<property name="name" value = "zhang"></property>
+   		<property name="age" value = "23"></property>
+   		<property name="sex">
+   			<null/>
+   		</property>
+   </bean>
+ 
+   
+   <!-- through constructor -->
+   <bean id = "s2" class = "com.atguigu.spring.di.Student">
+   		<constructor-arg value = "10086"></constructor-arg>
+   		<constructor-arg value = "Li"></constructor-arg>
+   		<constructor-arg value = "24"></constructor-arg>
+   		<constructor-arg value = "Female"></constructor-arg>
+   </bean>
+   
+   
+   <!-- index: index of the field in constructor -->
+   <bean id = "s3" class = "com.atguigu.spring.di.Student">
+   		<constructor-arg value = "10022"></constructor-arg>
+   		<constructor-arg value = "Wang"></constructor-arg>
+   		<constructor-arg value = "91" index = "2" type = "java.lang.Double"></constructor-arg>
+   		<constructor-arg value = "Female"></constructor-arg>
+   </bean>
+   
+   <!-- p name  -->
+   <bean id = "s4" class = "com.atguigu.spring.di.Student"
+   			p:id = "10033" p:name = "Zhao" p:age = "27" p:sex = "Female"
+   			p:teacher-ref = "t1"></bean>
+   
+   <!-- usage of ref -->
+   <bean id = "s5" class = "com.atguigu.spring.di.Student">
+   		<property name="id" value = "10010"></property>
+   		<property name="name" value = "zhang"></property>
+   		<property name="age" value = "23"></property>
+   		<property name="sex" value = "male"></property>
+   		<property name="teacher" ref = "t1"></property>
+   </bean>
+   
+   <bean id = "t1" class = "com.atguigu.spring.di.Teacher">
+   		<property name="tid" value = "10000"></property>
+   		<property name="name" value = "Xiao Ming"></property>
+   </bean>
+   
+    <!-- initiate within another variable -->
+    <bean id = "s6" class = "com.atguigu.spring.di.Student">
+   		<property name="id" value = "10010"></property>
+   		<property name="name" value = "zhang"></property>
+   		<property name="age" value = "23"></property>
+   		<property name="sex" value = "male"></property>
+   		<property name="teacher" ref = "t1"></property>
+   		<property name="teacher.name" value = "Hong"></property>
+   		<property name="teacher.tid" value = "10099"></property>
+   </bean>
+   
+   <!-- define bean within bean, the inner bean can only be accessed within the outer bean -->
+   <bean id = "s7" class = "com.atguigu.spring.di.Student">
+   		<property name="id" value = "10010"></property>
+   		<property name="name" value = "zhang"></property>
+   		<property name="age" value = "23"></property>
+   		<property name="sex" value = "male"></property>
+   		<property name="teacher" >
+   			<bean id = "tt"  class = "com.atguigu.spring.di.Teacher">
+   				<property name="tid" value = "10009"></property>
+   				<property name="name" value = "Da Ming"></property>
+   			</bean>
+   		</property>
+   </bean>
+   
+   <!-- directly assigning values to a list class -->
+   <bean id = "t2" class = "com.atguigu.spring.di.Teacher">
+   		<property name="tid" value = "0000"></property>
+   		<property name="name" value = "Gang Tong"></property>
+   		<property name="cls" >
+   			<list>
+   				<value>A</value>
+   				<value>B</value>
+   				<value>C</value>
+   			</list>
+   		</property>
+   </bean>
+   
+   <!-- assigning external beans to form the list -->
+   <bean id = "t3" class = "com.atguigu.spring.di.Teacher">
+   		<property name="tid" value = "10002"></property>
+   		<property name="name" value = "Sister Ting"></property>
+   		<property name="students" >
+   			<list>
+   				<ref bean = "s3"/>
+   				<ref bean = "s2"/>
+   				<ref bean = "s1"/>
+   			</list>
+   		</property>
+   </bean>
+   
+   <!-- adding map within the bean -->
+   <bean id = "t4" class = "com.atguigu.spring.di.Teacher">
+   		<property name="tid" value = "10003"></property>
+   		<property name="name" value = "admin"></property>
+   		<property name="bossMap" >
+   			<map>
+   				<entry>
+   					<key>
+   						<value>10001</value>
+   					</key>
+   					<value>Gang Tong</value>
+   				</entry>
+   				<entry>
+   					<key>
+   						<value>10002</value>
+   					</key>
+   					<value>Sister Ting</value>
+   				</entry>
+   			</map>
+   		</property>
+   </bean>
+   
+   <!-- using external sources as list to the bean -->
+   <bean id = "t5" class = "com.atguigu.spring.di.Teacher">
+   		<property name="tid" value = "10004"></property>
+   		<property name="name" value = "root"></property>
+   		<property name="students" ref = "students">
+   		</property>
+   </bean>
+   
+   <util:list id = "students">
+   		<ref bean = "s2"/>
+   		<ref bean = "s3"/>
+   		<ref bean = "s4"/>
+   </util:list>
+   
+</beans>
