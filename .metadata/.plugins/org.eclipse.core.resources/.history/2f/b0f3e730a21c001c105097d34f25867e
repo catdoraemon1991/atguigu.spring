@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   
+   <!-- the previous method -->
+<!--    <bean id = "emp" class = "com.atguigu.ioc.auto.Emp">
+   		<property name="eid" value="1001"></property>
+   		<property name="ename" value="Zhang San"></property>
+   		<property name="car" ref="car"></property>
+   		<property name="dept" ref="dept"></property>
+   </bean> -->
+	
+   <!-- new method, autowire when id is the same as property name-->	
+   <bean id = "emp" class = "com.atguigu.ioc.auto.Emp" autowire = "byName">
+   		<property name="eid" value="1001"></property>
+   		<property name="ename" value="Zhang San"></property>
+   </bean>
+   
+   <bean id = "car1" class = "com.atguigu.ioc.auto.Car">
+   		<property name="cid" value="666666"></property>
+   		<property name="cname" value="Honda"></property>
+   </bean>
+   
+   <bean id = "dept" class = "com.atguigu.ioc.auto.Dept">
+   		<property name="did" value="11111"></property>
+   		<property name="dname" value="Discharge"></property>
+   </bean>
+   
+</beans>

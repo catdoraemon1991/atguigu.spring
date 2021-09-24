@@ -1,0 +1,25 @@
+package com.atguigu.ioc.userMod.service;
+
+import org.springframework.stereotype.Service;
+
+import com.atguigu.ioc.userMod.dao.UserDao;
+import com.atguigu.ioc.userMod.dao.UserDaoImpl;
+
+@Service
+public class UserServiceImpl implements UserService{
+	
+	
+	private UserDao userDao = new UserDaoImpl();
+	
+	
+	public UserServiceImpl() {
+		System.out.println("UserServiceImpl");
+	}
+
+	@Override
+	public void addUser() {
+		// TODO Auto-generated method stub
+		userDao.addUser();
+	}
+
+}

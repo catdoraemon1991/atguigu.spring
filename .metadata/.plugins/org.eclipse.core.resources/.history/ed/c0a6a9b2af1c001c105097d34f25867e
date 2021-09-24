@@ -1,0 +1,26 @@
+package com.atguigu.ioc.userMod.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.atguigu.ioc.userMod.service.UserService;
+import com.atguigu.ioc.userMod.service.UserServiceImpl;
+
+@Controller
+public class UserController {
+	
+	
+	private UserService userService = new UserServiceImpl();
+	
+	public void addUser() {
+		userService.addUser();
+	}
+
+	public UserController() {
+		System.out.println("UserController");
+	}
+
+	
+	
+	
+}
